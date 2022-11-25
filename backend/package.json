@@ -4,9 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    
-    "start":"index.js watch -w"
-
+    "start": "nodemon index.js --w"
   },
   "author": "",
   "license": "ISC",
