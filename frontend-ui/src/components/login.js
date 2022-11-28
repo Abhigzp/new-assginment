@@ -1,27 +1,41 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-// import SignUp from './signup'
+import { useState, useEffect } from "react";
+import { useNavigate,Link } from "react-router-dom";
+
 const Login = () => {
-    const navigate = useNavigate();
-  const handleChange = () => {};
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [users, setUsers] = useState("");
 
-  const signUp = () => {};
+ 
 
-
-  const Login=()=>{
-
-  }
-
-//   const SignUphndl=()=>{
-
-//   }
+  const formHandle = async (e) => {
+    e.preventDefault();
+    let result = await fetch("http://localhost:3100/login", {
+      method: "post",
+      body: JSON.stringify({ email, password }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    result = await result.json();
+    if (result.fName) {
+      localStorage.setItem("user", JSON.stringify(result));
+      alert("login  successful");
+      navigate("/");
+    } else {
+      alert("you are not rejisterd");
+    }
+  };
   return (
-    <div>
-      <div className="container m-auto">
-        {/* {loginStatus?<UserInfo/>:!signUp? */}
-        <div  style={{width:"500px",margin:"auto"}}   className="form mt-4 pt-4">
-          <h2 className="text-center m-auto">Login Page</h2>
-          <small className="text-danger text-center">{}</small>
+    <div
+      className="container m-auto"
+      style={{ width: "500px", margin: "auto" }}
+    >
+      <div className="form mt-4 pt-4">
+        <h3 className="text-center m-auto">Login page</h3>
+        <form>
           <div className="form-group">
             <label>Email</label>
             <input
@@ -29,39 +43,54 @@ const Login = () => {
               name="email"
               placeholder="Enter your email"
               className="form-control"
-              onChange={handleChange}
+              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
+
+          {/* <label>Role---:</label>
+        
+        <select   style={{width:"20%"}} className="form-control"
+          onChange={(e) => {
+            const selectRole = e.target.value;
+            setRole(selectRole);
+          }}
+          // className="form-control"
+        >
+          <option>Choose Role</option>
+          <option vlaue={role}>Admin</option>
+          <option value={role}>Trainer</option>
+          <option value={role}>Member</option>
+        </select>
+        <br /> */}
           <div className="form-group">
             <label>Password</label>
             <input
-              type="input"
+              type="password"
               name="password"
               placeholder="Enter your password"
               className="form-control"
-              onChange={handleChange}
+              onChange={(e) => setPassword(e.target.value)}
             />
           </div>
+
           <div className="button text-center pt-4">
-            <button
-              className="btn btn-primary btn-sm"
-              onClick={() => Login()}
-            >
+            <button className="btn btn-primary btn-sm" onClick={formHandle}>
               Login
             </button>
           </div>
+          <div className="button text-center pt-4">
           <p className="pt-3">
             Don't have account ? please{" "}
             <span className="text-info">
-              <b onClick={() => signUp()}>SignUp</b>
+             <Link to="/SignUp"><b>SignUp</b></Link>
             </span>
             here.
           </p>
-        </div>
-        {/* : */}
-    {/* <span onClick={SignUphndl}> <SignUp/> </span> */}
+          </div>
+        </form>
       </div>
     </div>
   );
 };
+
 export default Login;
