@@ -10,7 +10,7 @@ const UpdateUser = () => {
   const [lName, setLName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
-  const [role,setRole] = useState("");
+  // const [role,setRole] = useState("");
 
   useEffect(() => {
     getAllData();
@@ -22,16 +22,16 @@ const UpdateUser = () => {
     result = await result.json();
     setFName(result.fName);
     setLName(result.lName);
-    setRole(result.role);
+    // setRole(result.role);
     setPhone(result.phone);
     setEmail(result.email);
   };
 
   const updateUser = async () => {
-    console.log(fName,lName , role, phone,email);
+    console.log(fName,lName , phone,email);
     let result = await fetch(`http://localhost:3100/delProduct/${params.id}`,{
       method:"put",
-      body:JSON.stringify({fName,lName,phone,role,email}),
+      body:JSON.stringify({fName,lName,phone,email}),
       headers:{
         "Content-type":"application/json"
       }
@@ -79,7 +79,7 @@ const UpdateUser = () => {
           placeholder="phone"
           value={phone}
         />
-        <label>Role</label> 
+        {/* <label>Role</label> 
           <select  onChange={(e)=> {
             const selectRole = e.target.value;
             setRole(selectRole);
@@ -89,7 +89,7 @@ const UpdateUser = () => {
             <option vlaue={role}>Admin</option>
             <option value={role}>Trainer</option>
             <option value={role}>Member</option>
-            </select>
+            </select> */}
         <label>email:-</label>
         <input
         className="form-control"

@@ -133,26 +133,26 @@ app.delete('/delEmp/:id', async (req,res)=>{
 
 
 
-// app.get('/delProduct/:id',async (req,res)=>{
-//   let result = await User.findOne({_id:req.params.id});
-//   if(result){
-//     res.send(result);
-//   }else{
-//     res.send({result:"No record found"})
-//   }
-// });
+app.get('/delEmp/:id',async (req,res)=>{
+  let result = await Employe.findOne({_id:req.params.id});
+  if(result){
+    res.send(result);
+  }else{
+    res.send({result:"No record found"})
+  }
+});
 
-// app.put('/delProduct/:id',async (req,res)=>{
-//   let result = await User.updateOne(
-//     {_id:req.params.id}
-//     ,{
-//        $set:req.body
-//      }
-//     );
+app.put('/delEmp/:id',async (req,res)=>{
+  let result = await Employe.updateOne(
+    {_id:req.params.id}
+    ,{
+       $set:req.body
+     }
+    );
 
-//   res.send(result);
+  res.send(result);
 
-// });
+});
 
 
 app.listen(port, ()=>console.log(`Server is Live at ${port}`));

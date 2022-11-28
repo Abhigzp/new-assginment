@@ -12,6 +12,7 @@ import AddUser from './Components/AddUser';
 
 import UpdateUser from "./Components/UpdateUser";
 import Employ from "./Components/Employ";
+import UpdateEmp from "./Components/UpdateEmp";
 function App() {
   return (
     <div className="App">
@@ -27,6 +28,7 @@ function App() {
           <Route path="/Login" element={<Login />}></Route>
           <Route path="/SignUp" element={<SignUp />}></Route>
           <Route path="/Emp" element={<Employ/>}></Route>
+          <Route path="/UpdateEmp/:id" element={<UpdateEmp/>}></Route>
         </Routes>
       </BrowserRouter>
       {/* <Footer /> */}
