@@ -4,7 +4,7 @@ import {useNavigate} from "react-router-dom";
 
 const UpdateEmp = () => {
 const[data,setData]=useState()
-const [fName,setFname] = useState();
+const [fName,setFName] = useState();
 const[lName,setLName] = useState();
 const [Dob,setDob]=useState();
 const [Doj,setDoj]=useState();
@@ -19,10 +19,10 @@ const params = useParams();
       }, []);
     
       const allData = async () => {
-        let result = await fetch("http://localhost:3100/allEmp");
+        let result = await fetch(`http://localhost:3100/allEmp/${params.id}`);
         result = await result.json();
-        setData(result);
-        setFname(result.fName)
+         console.log("result value",result);
+         setFName(result.fName)
         setLName(result.LName)
         setDob(result.Dob)
         setDoj(result.Doj)
