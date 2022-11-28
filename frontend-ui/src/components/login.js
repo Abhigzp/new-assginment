@@ -47,21 +47,7 @@ const Login = () => {
             />
           </div>
 
-          {/* <label>Role---:</label>
-        
-        <select   style={{width:"20%"}} className="form-control"
-          onChange={(e) => {
-            const selectRole = e.target.value;
-            setRole(selectRole);
-          }}
-          // className="form-control"
-        >
-          <option>Choose Role</option>
-          <option vlaue={role}>Admin</option>
-          <option value={role}>Trainer</option>
-          <option value={role}>Member</option>
-        </select>
-        <br /> */}
+          
           <div className="form-group">
             <label>Password</label>
             <input
