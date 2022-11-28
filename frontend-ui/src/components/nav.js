@@ -39,8 +39,8 @@ const Nav = () => {
         </ul>
       ) : (
         <ul className="nav-ul" style={{ textAlign: "right" }}>
-          <li><Link to="/Login">Login </Link> </li>
-          <li><Link to="/SignUp">SignUp </Link></li>
+          <li><Link to="/Login"></Link> </li>
+          <li><Link to="/SignUp"></Link></li>
         </ul>
       )}
     </div>

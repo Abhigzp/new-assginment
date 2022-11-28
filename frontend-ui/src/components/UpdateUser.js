@@ -22,7 +22,6 @@ const UpdateUser = () => {
     result = await result.json();
     setFName(result.fName);
     setLName(result.lName);
-    // setRole(result.role);
     setPhone(result.phone);
     setEmail(result.email);
   };

@@ -33,9 +33,7 @@ app.post("/rejister", async (req,res)=>{
  
 app.post("/login",async(req,res)=>{
   let user = await User.findOne({email:req.body.email});
- let becryptPassword= bcrypt.compareSync(req.body.password, user.password);
- console.log(becryptPassword);
- console.log(user);
+  let becryptPassword= bcrypt.compareSync(req.body.password, user.password);
   if(user){
     res.send(user)
   }else{
@@ -96,7 +94,7 @@ let result = await User.find({
   "$or":[
     { fName:{$regex:req.params.key}},
     { lName:{$regex:req.params.key}},
-    { role:{$regex:req.params.key}},
+    { phone:{$regex:req.params.key}},
     { email:{$regex:req.params.key}}
   ]
 });
@@ -104,9 +102,21 @@ res.send(result);
 });
 
 
-
-
-
+app.get("/search/:key",async(req,res)=>{
+  let result = await Employe.find({
+    "$or":[
+      { fname:{$regex:req.params.key}},
+      { lname:{$regex:req.params.key}},
+      { Dob:{$regex:req.params.key}},
+      { doj:{$regex:req.params.key}},
+      { Dob:{$regex:req.params.key}},
+      { salary:{$regex:req.params.key}}, 
+      { Desigination:{$regex:req.params.key}},
+      { department:{$regex:req.params.key}}
+    ]
+  });
+  res.send(result);
+  });
 app.post("/employe", async (req,res)=>{
   let emp = new Employe(req.body);
   console.log(req.body);

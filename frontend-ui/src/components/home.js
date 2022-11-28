@@ -27,7 +27,7 @@ const Home = () => {
    width: "80%",
    textAlign:"center"
 
-}}>Profile Page is in Progress.</h6>
+}}><span style={{fontWeight: 'bold'}}>Home</span> Page is in Progress.</h6>
 </div>
 <h6 style={{
   textAlign:"center",
