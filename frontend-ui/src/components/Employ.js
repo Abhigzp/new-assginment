@@ -3,8 +3,9 @@ import React from "react";
 import { confirmAlert } from "react-confirm-alert";
 import "react-confirm-alert/src/react-confirm-alert.css";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link ,useNavigate } from "react-router-dom";
 import Modal from "react-modal";
+
 const customStyles = {
   content: {
     top: "40%",
@@ -17,50 +18,81 @@ const customStyles = {
   },
 };
 
+
 const Employ = () => {
+  const navigate = useNavigate();
   const [data, setData] = useState();
 
   let subtitle;
   const [modalIsOpen, setIsOpen] = useState(false);
-  const [allEmpData, setAllEmpData] = useState([]);
-  const [employedetailes, setEmployeDetailes] = useState({
-    First_Name: "",
-    Last_Name: "",
-    Doj: "",
-    Salary: "",
-    Desigination: "",
-    Department: "",
-  });
-  const handleChange = (e) => {
-    const name = e.target.name;
-    const value = e.target.value;
-    setEmployeDetailes((values) => ({ ...values, [name]: value }));
-  };
-  const SaveAll = async (e) => {
-    // const result = await fetch("http://localhost:3100/addemployee", {
-    //     method: "post",
-    //     body: JSON.stringify({employedetailes }),
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    //   let data = await result.json();
-    //   console.log(data);
-    console.log(employedetailes);
+ const  [fname,setFName]=useState("");
+ const  [lname,setLname]=useState("");
+ const  [doj,setDoj ]= useState("");
+ const  [Dob,setDob]=useState("");
+ const [salary,setSalary]=useState("");
+ const [Desigination,setDesignation] =useState("");
+ const [department,setDepartment]=useState("");
+ const [allEmpData,setAllEmpData]=useState([]);
+ 
+ useEffect(() => {
+  allData();
+}, []);
+
+const allData = async () => {
+  let result = await fetch("http://localhost:3100/allEmp");
+  result = await result.json();
+  setAllEmpData(result);
+  console.log(result);
+};
+
+const SaveAll = async (e) => {
+  e.preventDefault();
+  if (!fname ) {
+    alert("please fill you  First name ");
+    return;
+  } 
+  else if(!lname ){
+    alert("required last name")
+    return;
+  } else if(!doj){
+    alert("required Date of Joining");
+    return;
+  } 
+  else if(!Dob){
+    alert("required Date of birth");
+    return;
+  } 
+ 
+  else if(!salary){
+       alert("required salary ")
+       return;
+  }
+  else if (!department){ 
+    alert("required department");
+    return;
+  }
+  else if(!Desigination){
+    alert("required desigination")
+    return;
+  }
+
+
+const result = await fetch("http://localhost:3100/employe", {
+  method: "post",
+  body: JSON.stringify({ fname,lname, doj, Dob,salary,Desigination, department }),
+  headers: {
+    "Content-Type": "application/json",
+  },
+});
+let data = await result.json();
+alert("added successfully")
+navigate("/Emp");
+
+   
+    
   };
 
-  useEffect(() => {
-    allData();
-  }, []);
-
-  const allData = async () => {
-    let result = await fetch("http://localhost:3100/allEmp");
-    result = await result.json();
-    setAllEmpData(result);
-    console.log(result);
-  };
-  console.log("products Data Orignal", allEmpData);
-  console.log("name values ", allEmpData.firstName);
+  
 
   const deleteUser = async (id) => {
     confirmAlert({
@@ -97,73 +129,86 @@ const Employ = () => {
         <div>
           <div
             className="btn btn-primary btn-sm"
-            style={{ background: "lightblue", float: "right" }}
+            style={{ background: "lightblue", float: "right" ,margin:"auto"}}
           >
             <button onClick={openModal}>Add Employe</button>{" "}
           </div>
           <h3 className="text-center m-auto">Employe detailes </h3>
 
           <Modal
+            
             isOpen={modalIsOpen}
             onAfterOpen={afterOpenModal}
             onRequestClose={closeModal}
             style={customStyles}
             contentLabel="Example Modal"
           >
-            <h2 ref={(_subtitle) => (subtitle = _subtitle)}>
-              Employee detailes{" "}
+            <div >
+            <h2  style={{margin:"auto" }}  ref={(_subtitle) => (subtitle = _subtitle)}>
+              Employee Form{" "}
             </h2>
-            <h3>----------------------------------------</h3>
-
             <form>
-              <div className="container m-auto">
-                <div className="form mt-4 pt-4">
-                  <div className="form-group">
+              <div >
+                <div >
+                  <div >
                     FName-:
                     <input
                       type="text"
+                      className="form-control"
                       placeholder="Name.."
-                      onChange={handleChange}
+                      onChange={(e)=>setFName(e.target.value)}
                     />
                   </div>
                   <div>
                     LName-:
                     <input
                       type="text"
+                      className="form-control"
                       placeholder="lName.."
-                      onChange={handleChange}
+                      onChange={(e)=>setLname(e.target.value)}
+                    />
+                  </div>
+                  <div>
+                    DOB-:
+                    <input
+                      type="date"
+                      className="form-control"
+                      placeholder="please select Joining Date..."
+                      onChange={(e)=>setDob(e.target.value)}
                     />
                   </div>
                   <div>
                     DOJ-:
                     <input
                       type="date"
+                      className="form-control"
                       placeholder="please select Joining Date..."
-                      onChange={handleChange}
+                      onChange={(e)=>setDoj(e.target.value)}
                     />
                   </div>
                   <div>
                     Salary
                     <input
                       type="number"
+                      className="form-control"
                       placeholder="salary.."
-                      onChange={handleChange}
+                      onChange={(e)=>setSalary(e.target.value)}
                     />
                   </div>
                   <div>
                     Designation
                     <input
-                      type="text"
+                      type="text" className="form-control"
                       placeholder="Desigination.."
-                      onChange={handleChange}
+                      onChange={(e)=>setDesignation(e.target.value)}
                     />
                   </div>
                   <div>
                     Department
                     <input
-                      type="text"
+                      type="text" className="form-control"
                       placeholder="department.."
-                      onChange={handleChange}
+                      onChange={(e)=>setDepartment(e.target.value)}
                     />
                   </div>{" "}
                   <br />
@@ -174,7 +219,7 @@ const Employ = () => {
                         type="subbmit"
                         onClick={SaveAll}
                       >
-                        add Employee
+                        Save
                       </button>{" "}
                     </div>
                   </span>
@@ -189,6 +234,7 @@ const Employ = () => {
                 </div>
               </div>
             </form>
+            </div>
           </Modal>
         </div>
         <div className="product-list">

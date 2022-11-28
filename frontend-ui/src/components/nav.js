@@ -29,7 +29,7 @@ const Nav = () => {
         <ul className="nav-ul ">
           <li><Link to="/">Home </Link>  </li>
          
-          <li> <Link to="/AddUser">User </Link></li>
+          <li> <Link to="/User">User </Link></li>
           <li><Link to="/Emp">Employee</Link></li>
           <li style={{ float: "right" }}><Link onClick={handle} to="/login">
               <span style={{ fontWeight: "bold" }}> Logout </span>

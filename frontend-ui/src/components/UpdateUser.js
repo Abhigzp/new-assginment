@@ -39,7 +39,7 @@ const UpdateUser = () => {
     result =await result.json()
     console.log(result);
     alert("updated successful")
-    navigate("/");
+    navigate("/User");
   };
 
   return (

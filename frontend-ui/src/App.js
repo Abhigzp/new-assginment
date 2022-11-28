@@ -8,7 +8,7 @@ import Home from './Components/home'
 import SignUp from "./Components/SignUp";
 import Login from "./Components/Login";
 import PrivateCom from "./Components/PrivateCom";
-import AddUser from './Components/AddUser';
+import User from './Components/User';
 
 import UpdateUser from "./Components/UpdateUser";
 import Employ from "./Components/Employ";
@@ -21,7 +21,7 @@ function App() {
         <Routes>
           <Route element={<PrivateCom />}>
             <Route path="/" element={<Home/>}></Route>
-            <Route path="/addUser" element={<AddUser/>}></Route>
+            <Route path="/User" element={<User/>}></Route>
           
             <Route path="/Upproducts/:id" element={<UpdateUser/>}></Route>      
           </Route>
