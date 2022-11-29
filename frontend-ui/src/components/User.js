@@ -41,6 +41,19 @@ const User = () => {
   console.log("products Data Orignal", products);
   console.log("name values ", products.name);
 
+  const handlesrch = async (e) => {
+    let key = e.target.value;
+    if (key) {
+      let result = await fetch(`http://localhost:3100/search/${key}`);
+      result = await result.json();
+      if (result) {
+        setProducts(result);
+      }
+    } else {
+      allData();
+    }
+  };
+
   const deleteUser = async (id) => {
     confirmAlert({
       title: "Confirm to Delete",
@@ -63,18 +76,7 @@ const User = () => {
       ],
     });
   };
-  const handlesrch = async (e) => {
-    let key = e.target.value;
-    if (key) {
-      let result = await fetch(`http://localhost:3100/search/${key}`);
-      result = await result.json();
-      if (result) {
-        setProducts(result);
-      }
-    } else {
-      allData();
-    }
-  };
+ 
 
 
   const savedata = async (e) => {

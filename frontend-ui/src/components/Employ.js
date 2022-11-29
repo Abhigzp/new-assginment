@@ -42,6 +42,20 @@ const Employ = () => {
     console.log(result);
   };
 
+  const handlesrch = async (e) => {
+    let key = e.target.value;
+    if (key) {
+      let result = await fetch(`http://localhost:3100/searchEmp/${key}`);
+      result = await result.json();
+      if (result) {
+        setAllEmpData(result);
+        console.log(result);
+      }
+    } else {
+      allData();
+    }
+  };
+
   const SaveAll = async (e) => {
     e.preventDefault();
     if (!fname) {
@@ -109,18 +123,7 @@ const Employ = () => {
       ],
     });
   };
-  const handlesrch = async (e) => {
-    let key = e.target.value;
-    if (key) {
-      let result = await fetch(`http://localhost:3100/search/${key}`);
-      result = await result.json();
-      if (result) {
-        setProducts(result);
-      }
-    } else {
-      allData();
-    }
-  };
+  
 
   // modal functions here
   const openModal = () => setIsOpen(true);

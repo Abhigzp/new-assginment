@@ -5,7 +5,7 @@ require('./db/config');
 const AddUserSch=require('./db/AddUserSch');
 const User = require('./db/User');
 const Employe=require ('./db/Employe')
-const Product=require('./db/Product');
+// const Product=require('./db/Product');
 const { response } = require("express");
 const Jwt = require('jsonwebtoken');
 const jwtKey='e-comm';
@@ -48,6 +48,7 @@ app.get('/allUsers', async (req,res)=>{
   console.log(data);
     }else{
     res.send({result:"no products found"});
+
   }
 });
 
@@ -102,7 +103,7 @@ res.send(result);
 });
 
 
-app.get("/search/:key",async(req,res)=>{
+app.get("/searchEmp/:key",async(req,res)=>{
   let result = await Employe.find({
     "$or":[
       { fname:{$regex:req.params.key}},
