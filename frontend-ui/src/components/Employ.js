@@ -29,7 +29,7 @@ const Employ = () => {
   const [Desigination, setDesignation] = useState("");
   const [department, setDepartment] = useState("");
   const [allEmpData, setAllEmpData] = useState([]);
-  const [data,setData] =useState([]);
+  // const [data,setData] =useState([]);
   // const [products, setProducts] = useState([]);
   const[user,setUser]=useState("");
 
@@ -42,7 +42,7 @@ const Employ = () => {
     const userId=localStorage.getItem("user");
     
     let userDeta=JSON.parse(userId)._id;
-    console.log(userDeta);
+    
     setUser(userDeta)
 
     
@@ -52,10 +52,9 @@ const Employ = () => {
   const allData = async () => {
     let result = await fetch("http://localhost:3100/allEmp");
     result = await result.json();
-    let arr= result.filter((v)=>v.user==user);
-    console.log("all data",arr);
+    let arr= result.filter((v)=>v.user===user);
     setAllEmpData(arr)
-    console.log(user)
+    
     
     
   };
@@ -279,7 +278,7 @@ const Employ = () => {
           />
           <ul>
             <li
-              style={{ border: "1px solid black", width: "10%", width: "3%" }}
+              style={{ border: "1px solid black", width: "10%",  }}
             >
               S.No
             </li>

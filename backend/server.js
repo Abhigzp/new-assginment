@@ -72,14 +72,14 @@ if(becryptPassword){
 })
 
 
-app.post("/login",async(req,res)=>{
-  let user = await User.findOne({email:req.body.email});
-  if(user){
-    res.send(user)
-  }else{
-    res.send({result:"No user found"})
-  }
-})
+// app.post("/login",async(req,res)=>{
+//   let user = await User.findOne({email:req.body.email});
+//   if(user){
+//     res.send(user)
+//   }else{
+//     res.send({result:"No user found"})
+//   }
+// })
 
 
 
