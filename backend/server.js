@@ -31,15 +31,59 @@ app.post("/rejister", async (req,res)=>{
   })
 });
  
+// app.post("/login",async(req,res)=>{
+  
+ 
+ 
+//   let user = await User.findOne({email:email});
+//   // if(user.email==email){
+   
+//   //   res.send(user)
+//   // }
+//   // // else if(user.password=== becryptPassword){
+    
+//   // // }
+//   // else{
+//   //   res.send({result:"No user found"})
+//   // }
+//   if(user){
+//     res.send(user)
+//   }else{
+//     res.send({result:"No user found"})
+//   }
+// })
+
+
+
+
+
 app.post("/login",async(req,res)=>{
   let user = await User.findOne({email:req.body.email});
-  let becryptPassword= bcrypt.compareSync(req.body.password, user.password);
+  if(user){
+let becryptPassword= bcrypt.compareSync(req.body.password, user.password);
+if(becryptPassword){
+  res.send(user)
+}else{
+  res.send({message: 'Wrong password'})
+} 
+  }else{
+    res.send({message:"No user found"})
+  }
+})
+
+
+app.post("/login",async(req,res)=>{
+  let user = await User.findOne({email:req.body.email});
   if(user){
     res.send(user)
   }else{
     res.send({result:"No user found"})
   }
 })
+
+
+
+
 // get all data  of users
 app.get('/allUsers', async (req,res)=>{
   let data  = await User.find();

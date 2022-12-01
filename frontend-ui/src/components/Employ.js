@@ -30,16 +30,40 @@ const Employ = () => {
   const [department, setDepartment] = useState("");
   const [allEmpData, setAllEmpData] = useState([]);
   const [products, setProducts] = useState([]);
+  const[user,setUser]=useState("");
+
+
+  console.log("employes of user",allEmpData)
 
   useEffect(() => {
     allData();
-  }, []);
+  },[]);
+
+  useEffect(()=>{
+    const userId=localStorage.getItem("user");
+    let userDeta=JSON.parse(userId)._id;
+    setUser(userDeta)
+    console.log("userId-:",typeof(user))
+
+  },[user])
 
   const allData = async () => {
+   
+    
     let result = await fetch("http://localhost:3100/allEmp");
     result = await result.json();
-    setAllEmpData(result);
-    console.log(result);
+    let userData=[];
+    let arr= result.filter((v)=>{
+       if(v.user!==user){
+       console.log("data not found")
+      }else{
+        userData.push(v)
+      }
+      return userData
+    })
+    setAllEmpData(userData);
+    console.log("result",arr);
+    
   };
 
   const handlesrch = async (e) => {
@@ -49,7 +73,7 @@ const Employ = () => {
       result = await result.json();
       if (result) {
         setAllEmpData(result);
-        console.log(result);
+        
       }
     } else {
       allData();
@@ -80,6 +104,8 @@ const Employ = () => {
       alert("required desigination");
       return;
     }
+   
+   
 
     const result = await fetch("http://localhost:3100/employe", {
       method: "post",
@@ -91,6 +117,7 @@ const Employ = () => {
         salary,
         Desigination,
         department,
+        user
       }),
       headers: {
         "Content-Type": "application/json",

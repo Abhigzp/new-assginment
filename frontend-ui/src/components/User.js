@@ -27,6 +27,7 @@ const User = () => {
   const [lName, setLName] = useState("");
   const navigate = useNavigate();
   const [products, setProducts] = useState([]);
+  const [userId,setUserID]=useState("");
 
   useEffect(() => {
     allData();
@@ -36,10 +37,10 @@ const User = () => {
     let result = await fetch("http://localhost:3100/allUsers");
     result = await result.json();
     setProducts(result);
-    console.log(result);
+    // console.log(result._id);
   };
-  console.log("products Data Orignal", products);
-  console.log("name values ", products.name);
+  // console.log("products Data Orignal", products);
+  // console.log("name values ", products.name);
 
   const handlesrch = async (e) => {
     let key = e.target.value;

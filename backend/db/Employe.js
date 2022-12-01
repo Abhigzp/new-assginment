@@ -8,6 +8,7 @@ const  employeeSchema = new mongoose.Schema({
     salary:String,
     Desigination:String,
     department:String,
+    user:String,
 })
 
 module.exports = mongoose.model("employee",employeeSchema)

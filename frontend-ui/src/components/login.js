@@ -12,6 +12,9 @@ const Login = () => {
 
   const formHandle = async (e) => {
     e.preventDefault();
+    if(!email || !password){
+      alert ("please fill all detailes before login")
+    }else {
     let result = await fetch("http://localhost:3100/login", {
       method: "post",
       body: JSON.stringify({ email, password }),
@@ -20,13 +23,19 @@ const Login = () => {
       },
     });
     result = await result.json();
-    if (result.fName) {
+    console.log(result)
+
+    if(result.message==="Wrong password"){
+      alert("your Password is incorrect");
+    }else if(result.message==="No user found"){
+      alert("user Not found")
+    }else if (result.fName) {
       localStorage.setItem("user", JSON.stringify(result));
       alert("login  successful");
       navigate("/");
-    } else {
-      alert("you are not rejisterd");
-    }
+    } 
+   
+  }
   };
   return (
     <div
