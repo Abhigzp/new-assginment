@@ -29,40 +29,34 @@ const Employ = () => {
   const [Desigination, setDesignation] = useState("");
   const [department, setDepartment] = useState("");
   const [allEmpData, setAllEmpData] = useState([]);
-  const [products, setProducts] = useState([]);
+  const [data,setData] =useState([]);
+  // const [products, setProducts] = useState([]);
   const[user,setUser]=useState("");
 
 
-  console.log("employes of user",allEmpData)
-
   useEffect(() => {
     allData();
-  },[]);
+  },[user]);
 
   useEffect(()=>{
     const userId=localStorage.getItem("user");
+    
     let userDeta=JSON.parse(userId)._id;
+    console.log(userDeta);
     setUser(userDeta)
-    console.log("userId-:",typeof(user))
 
-  },[user])
+    
+
+  },[])
 
   const allData = async () => {
-   
-    
     let result = await fetch("http://localhost:3100/allEmp");
     result = await result.json();
-    let userData=[];
-    let arr= result.filter((v)=>{
-       if(v.user!==user){
-       console.log("data not found")
-      }else{
-        userData.push(v)
-      }
-      return userData
-    })
-    setAllEmpData(userData);
-    console.log("result",arr);
+    let arr= result.filter((v)=>v.user==user);
+    console.log("all data",arr);
+    setAllEmpData(arr)
+    console.log(user)
+    
     
   };
 
@@ -281,7 +275,7 @@ const Employ = () => {
             type="search"
             onChange={handlesrch}
             className="search-product-box"
-            placeholder="search-user"
+            placeholder="search-Employe detailes"
           />
           <ul>
             <li
